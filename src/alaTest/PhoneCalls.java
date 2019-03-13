@@ -14,25 +14,38 @@ public class PhoneCalls {
 		String number = scanner.nextLine();
 		float priceA = getPrice(number,operatorA);
 		float priceB = getPrice(number,operatorB);
-		printBestOption(priceA,priceB);
+		int opt = printBestOption(priceA,priceB);
 	}
 
-	private static void printBestOption(float priceA, float priceB) {
-		if(priceA==-1.0 && priceB==-1.0)
+	protected static int printBestOption(float priceA, float priceB) {
+		// returns 0 for same price, 1 for price A, 2 for price B, 3 for no suitable operator
+		if(priceA==-1.0 && priceB==-1.0) {
 			System.out.println("There are no suitable operators.");
-		else if (priceA==-1.0)
+			return 3; 
+		}
+		else if (priceA==-1.0){
 			System.out.println("The B option, which is " + priceB + " $ is the best option.");
-		else if (priceB==-1.0)
+			return 2; 
+		}
+		else if (priceB==-1.0) {
 			System.out.println("The A option, which is " + priceA + " $ is the best option.");
-		else if(Float.compare(priceA, priceB) < 0)
+			return 1; 
+		}
+		else if(Float.compare(priceA, priceB) < 0){
 			System.out.println("The A option, which is " + priceA + " $ is the best option.");
-		else if(Float.compare(priceA, priceB) > 0)
+			return 1;
+		}
+		else if(Float.compare(priceA, priceB) > 0){
 			System.out.println("The B option, which is " + priceB + " $ is the best option.");
-		else
+			return 2;
+		}
+		else{
 			System.out.println("Two options have same prices: " + priceA + " $.");
+			return 0;
+		}
 	}
 
-	private static float getPrice(String number, HashMap<String, Float> operator) {
+	protected static float getPrice(String number, HashMap<String, Float> operator) {
 		number = number.replaceAll("\\D", "");
 		
 		for(int i = number.length(); i>0; i-- ) {
@@ -46,7 +59,7 @@ public class PhoneCalls {
 		return -1;
 	}
 
-	private static HashMap<String, Float> createPriceListA() {
+	protected static HashMap<String, Float> createPriceListA() {
 		HashMap<String,Float> newOperator = new HashMap<String,Float>();
 		
 		newOperator.put("1", (float) 0.9);
@@ -62,7 +75,7 @@ public class PhoneCalls {
 		return newOperator;
 	}
 	
-	private static HashMap<String, Float> createPriceListB() {
+	protected static HashMap<String, Float> createPriceListB() {
 		HashMap<String,Float> newOperator = new HashMap<String,Float>();
 		
 		newOperator.put("1", (float) 0.92);
