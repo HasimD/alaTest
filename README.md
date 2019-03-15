@@ -1,3 +1,3 @@
 # alaTest
 JUnit 5 is used for testing.
-Any question for delibasahmet@gmail.com
+For any question: delibasahmet@gmail.com
